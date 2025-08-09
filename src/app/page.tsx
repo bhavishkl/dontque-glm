@@ -63,20 +63,6 @@ export default function Home() {
   return (
     <MainLayout>
       <div className="space-y-6">
-        {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900">Welcome to QueueHub</h1>
-            <p className="text-gray-600">Skip the wait, join queues for any service instantly</p>
-          </div>
-          <Link href="/join-queue">
-            <Button className="bg-gray-900 hover:bg-gray-800 text-white">
-              <PlusCircle className="w-4 h-4 mr-2" />
-              Browse All Services
-            </Button>
-          </Link>
-        </div>
-
         {/* Queue Search Component - Priority Section */}
         <QueueSearch 
           onSearch={handleSearch}

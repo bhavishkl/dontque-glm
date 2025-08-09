@@ -3,13 +3,14 @@
 import { useState } from "react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+import { Card, CardContent } from "@/components/ui/card"
 import { 
   Search, 
   QrCode, 
-  Hash
+  Hash,
+  PlusCircle
 } from "lucide-react"
+import Link from "next/link"
 
 interface QueueSearchProps {
   onSearch: (query: string) => void
@@ -35,16 +36,7 @@ export function QueueSearch({ onSearch, onQueueIdSubmit, onQrScan }: QueueSearch
 
   return (
     <Card className="border-gray-200 shadow-sm">
-      <CardHeader className="pb-4">
-        <CardTitle className="text-xl font-bold text-gray-900 flex items-center gap-2">
-          <Search className="w-5 h-5 text-gray-700" />
-          Quick Queue Access
-        </CardTitle>
-        <CardDescription className="text-gray-600">
-          Search services, enter queue ID, or scan QR code to join queues instantly
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-4 p-6">
         {/* Queue ID Input - Priority Section */}
         <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
           <div className="flex items-center gap-2 mb-2">
@@ -91,24 +83,13 @@ export function QueueSearch({ onSearch, onQueueIdSubmit, onQrScan }: QueueSearch
           </Button>
         </div>
 
-        {/* Quick Actions */}
-        <div className="flex flex-wrap gap-2 pt-2">
-          <Badge variant="outline" className="text-xs cursor-pointer hover:bg-gray-100 border-gray-300 text-gray-700">
-            ⚡ Fast Track
-          </Badge>
-          <Badge variant="outline" className="text-xs cursor-pointer hover:bg-gray-100 border-gray-300 text-gray-700">
-            🏥 Hospitals
-          </Badge>
-          <Badge variant="outline" className="text-xs cursor-pointer hover:bg-gray-100 border-gray-300 text-gray-700">
-            ⛽ CNG Pumps
-          </Badge>
-          <Badge variant="outline" className="text-xs cursor-pointer hover:bg-gray-100 border-gray-300 text-gray-700">
-            🍔 Restaurants
-          </Badge>
-          <Badge variant="outline" className="text-xs cursor-pointer hover:bg-gray-100 border-gray-300 text-gray-700">
-            🏦 Banks
-          </Badge>
-        </div>
+        {/* Browse All Services Button */}
+        <Link href="/join-queue">
+          <Button className="w-full bg-gray-900 hover:bg-gray-800 text-white font-semibold flex items-center justify-center gap-2">
+            <PlusCircle className="w-4 h-4" />
+            Browse All Services
+          </Button>
+        </Link>
       </CardContent>
     </Card>
   )
