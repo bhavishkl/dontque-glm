@@ -150,8 +150,8 @@ export default function NotificationsPage() {
       read: true,
       priority: "high",
       action: {
-        text: "Join Queue",
-        url: "/join-queue"
+        text: "Find Services",
+        url: "/find-services"
       }
     },
     {

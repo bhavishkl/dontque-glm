@@ -24,10 +24,8 @@ import { Input } from "@/components/ui/input"
 // Optimized navigation array for performance
 const navigation = [
   { name: "Dashboard", href: "/", icon: Home, mobileOnly: false },
-  { name: "Services", href: "/services", icon: Search, mobileOnly: false },
-  { name: "Join Queue", href: "/join-queue", icon: PlusCircle, mobileOnly: false },
+  { name: "Find Services", href: "/find-services", icon: Search, mobileOnly: false },
   { name: "My Queues", href: "/my-queues", icon: List, mobileOnly: true },
-  { name: "Find Services", href: "/find-services", icon: MapPin, mobileOnly: true },
   { name: "Profile", href: "/profile", icon: User, mobileOnly: true },
   { name: "Notifications", href: "/notifications", icon: Bell, mobileOnly: true },
   { name: "Settings", href: "/settings", icon: Settings, mobileOnly: true },

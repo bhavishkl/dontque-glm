@@ -118,7 +118,7 @@ export default function Home() {
         <div>
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-bold text-gray-900">Available Services</h2>
-            <Link href="/services">
+            <Link href="/find-services">
               <Button variant="outline" className="border-gray-300 text-gray-700 hover:bg-gray-50">View All Services</Button>
             </Link>
           </div>
@@ -137,7 +137,7 @@ export default function Home() {
                     <div className="text-sm text-gray-600">
                       <strong>Category:</strong> {service.category}
                     </div>
-                    <Link href={`/join-queue?service=${service.id}`}>
+                    <Link href={`/find-services?service=${service.id}`}>
                       <Button className="w-full mt-3 bg-gray-900 hover:bg-gray-800 text-white" size="sm">
                         Join Queue
                       </Button>

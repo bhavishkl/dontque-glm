@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { 
   Home, 
-  PlusCircle, 
   List, 
   MapPin, 
   User, 
@@ -15,7 +14,6 @@ import {
   Info,
   Menu,
   X,
-  Grid3X3,
   Activity
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -24,10 +22,8 @@ import { useState } from "react"
 
 const navigation = [
   { name: "Dashboard", href: "/", icon: Home },
-  { name: "Services", href: "/services", icon: Grid3X3 },
-  { name: "Join Queue", href: "/join-queue", icon: PlusCircle },
-  { name: "My Queues", href: "/my-queues", icon: List },
   { name: "Find Services", href: "/find-services", icon: MapPin },
+  { name: "My Queues", href: "/my-queues", icon: List },
   { name: "Profile", href: "/profile", icon: User },
   { name: "Notifications", href: "/notifications", icon: Bell },
   { name: "Activity", href: "/activity", icon: Activity },

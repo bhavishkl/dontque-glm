@@ -16,8 +16,7 @@ import { Badge } from "@/components/ui/badge"
 
 const bottomNavigation = [
   { name: "Home", href: "/", icon: Home },
-  { name: "Search", href: "/find-services", icon: Search },
-  { name: "Join", href: "/join-queue", icon: PlusCircle },
+  { name: "Find", href: "/find-services", icon: Search },
   { name: "Queues", href: "/my-queues", icon: List },
   { name: "Profile", href: "/profile", icon: User },
 ]

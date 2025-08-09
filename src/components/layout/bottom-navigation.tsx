@@ -24,9 +24,9 @@ const bottomNavItems = [
     badgeCount: 0
   },
   { 
-    name: "Services", 
-    href: "/services", 
-    icon: PlusCircle,
+    name: "Find", 
+    href: "/find-services", 
+    icon: MapPin,
     showBadge: false,
     badgeCount: 0
   },
@@ -36,13 +36,6 @@ const bottomNavItems = [
     icon: List,
     showBadge: true,
     badgeCount: 2 // This would come from an API/context
-  },
-  { 
-    name: "Nearby", 
-    href: "/find-services", 
-    icon: MapPin,
-    showBadge: false,
-    badgeCount: 0
   },
   { 
     name: "Profile", 
