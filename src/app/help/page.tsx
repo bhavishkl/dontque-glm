@@ -33,7 +33,7 @@ export default function HelpPage() {
       items: [
         {
           question: "How do I join a queue at a CNG pump?",
-          answer: "To join a queue, go to the 'Join Queue' page, select your preferred CNG pump, enter your vehicle number and driver name, then click 'Join Queue'. You'll receive a confirmation with your position and estimated wait time."
+          answer: "To join a queue, go to the 'Find Services' page, select your preferred CNG pump, enter your vehicle number and driver name, then click 'Join Queue'. You'll receive a confirmation with your position and estimated wait time."
         },
         {
           question: "How do I find nearby CNG pumps?",

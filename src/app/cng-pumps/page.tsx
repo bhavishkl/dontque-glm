@@ -322,7 +322,7 @@ export default function CNGPumpsPage() {
                       Get Directions
                     </Button>
                     <Button variant="outline" className="flex-1">
-                      Join Queue
+                      Find Services
                     </Button>
                   </div>
                 </div>
