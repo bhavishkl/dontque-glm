@@ -139,7 +139,7 @@ export default function Home() {
                     </div>
                     <Link href={`/find-services?service=${service.id}`}>
                       <Button className="w-full mt-3 bg-gray-900 hover:bg-gray-800 text-white" size="sm">
-                        Join Queue
+                        Find Services
                       </Button>
                     </Link>
                   </div>

@@ -83,11 +83,11 @@ export function QueueSearch({ onSearch, onQueueIdSubmit, onQrScan }: QueueSearch
           </Button>
         </div>
 
-        {/* Browse All Services Button */}
+        {/* Find Services Button */}
         <Link href="/find-services">
           <Button className="w-full bg-gray-900 hover:bg-gray-800 text-white font-semibold flex items-center justify-center gap-2">
             <PlusCircle className="w-4 h-4" />
-            Browse All Services
+            Find Services
           </Button>
         </Link>
       </CardContent>
