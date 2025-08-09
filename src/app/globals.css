@@ -119,6 +119,7 @@
   body {
     @apply bg-background text-foreground;
   }
+<<<<<<< HEAD
   
   /* Safe area support for mobile devices */
   .safe-area-top {
@@ -153,4 +154,6 @@
       -webkit-tap-highlight-color: transparent;
     }
   }
+=======
+>>>>>>> f44114e207d42265333890f4cc8b677e778e9ad2
 }
