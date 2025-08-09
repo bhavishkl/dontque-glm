@@ -1,196 +1,179 @@
 "use client"
 
-import { useState, useMemo, useCallback } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { 
   Home, 
+  PlusCircle, 
+  List, 
+  MapPin, 
+  User, 
   Bell, 
   Settings, 
-  User, 
   Menu,
+  X,
   Search,
-  PlusCircle,
-  LogOut,
-  ChevronDown
+  QrCode
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+import { Input } from "@/components/ui/input"
 
-// Memoized navigation items for performance
-const headerActions = [
-  { name: "Search", href: "/search", icon: Search, mobileOnly: false },
-  { name: "Join Queue", href: "/join-queue", icon: PlusCircle, mobileOnly: true },
-] as const
+// Optimized navigation array for performance
+const navigation = [
+  { name: "Dashboard", href: "/", icon: Home, mobileOnly: false },
+  { name: "Services", href: "/services", icon: Search, mobileOnly: false },
+  { name: "Join Queue", href: "/join-queue", icon: PlusCircle, mobileOnly: false },
+  { name: "My Queues", href: "/my-queues", icon: List, mobileOnly: true },
+  { name: "Find Services", href: "/find-services", icon: MapPin, mobileOnly: true },
+  { name: "Profile", href: "/profile", icon: User, mobileOnly: true },
+  { name: "Notifications", href: "/notifications", icon: Bell, mobileOnly: true },
+  { name: "Settings", href: "/settings", icon: Settings, mobileOnly: true },
+]
 
 export function Header() {
   const pathname = usePathname()
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  
-  // Memoize user data to prevent unnecessary re-renders
-  const userData = useMemo(() => ({
-    name: "John Doe",
-    email: "john@example.com",
-    avatar: "/placeholder-avatar.jpg",
-    isPremium: true,
-    notificationCount: 3,
-  }), [])
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [activeQueuesCount, setActiveQueuesCount] = useState(2) // This would come from an API/context
 
-  // Memoize active state calculations
-  const isActive = useCallback((href: string) => pathname === href, [pathname])
+  // Performance optimization: Scroll event listener with throttling
+  useEffect(() => {
+    let ticking = false
+    
+    const updateScrollState = () => {
+      setIsScrolled(window.scrollY > 10)
+      ticking = false
+    }
 
-  // Optimized handler for mobile menu
-  const toggleMobileMenu = useCallback(() => {
-    setIsMobileMenuOpen(prev => !prev)
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(updateScrollState)
+        ticking = true
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  // Close menu when route changes
+  useEffect(() => {
+    setIsMenuOpen(false)
+  }, [pathname])
+
+  // Filter navigation based on screen size and current route
+  const desktopNav = navigation.filter(item => !item.mobileOnly)
+  const mobileNav = navigation
+
   return (
-    <header className="sticky top-0 z-50 w-full bg-white border-b border-gray-200 shadow-sm">
-      <div className="px-4 sm:px-6 lg:px-8">
+    <header className={cn(
+      "fixed top-0 left-0 right-0 z-50 transition-all duration-200 ease-in-out",
+      isScrolled 
+        ? "bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm" 
+        : "bg-white border-b border-gray-100"
+    )}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo and Brand */}
           <div className="flex items-center gap-3">
             <Link href="/" className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-gradient-to-br from-gray-800 to-gray-600 rounded-lg flex items-center justify-center flex-shrink-0">
                 <span className="text-white font-bold text-sm">Q</span>
               </div>
-              <div className="hidden sm:block">
-                <h1 className="text-lg font-semibold text-gray-900">QueueHub</h1>
-                <p className="text-xs text-gray-500">Smart Queuing</p>
-              </div>
+              <span className="text-lg font-semibold text-gray-900 hidden sm:block">QueueHub</span>
             </Link>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-1">
-            {headerActions
-              .filter(action => !action.mobileOnly)
-              .map((action) => (
-                <Link key={action.name} href={action.href}>
-                  <Button
-                    variant={isActive(action.href) ? "default" : "ghost"}
-                    size="sm"
-                    className={cn(
-                      "flex items-center gap-2",
-                      isActive(action.href) 
-                        ? "bg-gray-900 text-white" 
-                        : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
-                    )}
-                  >
-                    <action.icon className="w-4 h-4" />
-                    <span>{action.name}</span>
-                  </Button>
+            {desktopNav.map((item) => {
+              const isActive = pathname === item.href
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={cn(
+                    "flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+                    isActive
+                      ? "bg-gray-100 text-gray-900"
+                      : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                  )}
+                >
+                  <item.icon className="w-4 h-4" />
+                  <span>{item.name}</span>
+                  {item.name === "My Queues" && activeQueuesCount > 0 && (
+                    <Badge variant="secondary" className="ml-1 text-xs">
+                      {activeQueuesCount}
+                    </Badge>
+                  )}
                 </Link>
-              ))}
+              )
+            })}
           </nav>
 
           {/* Right Side Actions */}
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-2">
             {/* Notifications */}
-            <Button variant="ghost" size="icon" className="relative text-gray-600 hover:text-gray-900">
+            <Button variant="ghost" size="icon" className="relative">
               <Bell className="w-5 h-5" />
-              {userData.notificationCount > 0 && (
-                <Badge 
-                  variant="destructive" 
-                  className="absolute -top-1 -right-1 w-5 h-5 p-0 flex items-center justify-center text-xs"
-                >
-                  {userData.notificationCount}
+              {activeQueuesCount > 0 && (
+                <Badge className="absolute -top-1 -right-1 w-5 h-5 p-0 flex items-center justify-center text-xs">
+                  {activeQueuesCount}
                 </Badge>
               )}
             </Button>
 
             {/* User Menu */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-                  <Avatar className="h-8 w-8">
-                    <AvatarImage src={userData.avatar} alt={userData.name} />
-                    <AvatarFallback className="bg-gray-200 text-gray-700 text-xs">
-                      {userData.name.split(' ').map(n => n[0]).join('')}
-                    </AvatarFallback>
-                  </Avatar>
-                  {userData.isPremium && (
-                    <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-yellow-500 rounded-full border-2 border-white" />
-                  )}
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56" align="end" forceMount>
-                <DropdownMenuLabel className="font-normal">
-                  <div className="flex flex-col space-y-1">
-                    <p className="text-sm font-medium leading-none">{userData.name}</p>
-                    <p className="text-xs leading-none text-muted-foreground">
-                      {userData.email}
-                    </p>
-                    {userData.isPremium && (
-                      <Badge variant="secondary" className="w-fit mt-1">
-                        Premium
-                      </Badge>
-                    )}
-                  </div>
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem asChild>
-                  <Link href="/profile" className="flex items-center gap-2">
-                    <User className="w-4 h-4" />
-                    <span>Profile</span>
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link href="/settings" className="flex items-center gap-2">
-                    <Settings className="w-4 h-4" />
-                    <span>Settings</span>
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem className="flex items-center gap-2 text-red-600">
-                  <LogOut className="w-4 h-4" />
-                  <span>Log out</span>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <Button variant="ghost" size="icon">
+              <User className="w-5 h-5" />
+            </Button>
 
-            {/* Mobile Menu Toggle */}
+            {/* Mobile Menu Button */}
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden text-gray-600 hover:text-gray-900"
-              onClick={toggleMobileMenu}
+              className="md:hidden"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              <Menu className="w-5 h-5" />
+              {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </Button>
           </div>
         </div>
-
-        {/* Mobile Menu Dropdown */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden border-t border-gray-200 py-2">
-            <nav className="space-y-1">
-              {headerActions.map((action) => (
-                <Link key={action.name} href={action.href} onClick={toggleMobileMenu}>
-                  <Button
-                    variant={isActive(action.href) ? "default" : "ghost"}
-                    className="w-full justify-start"
-                    size="sm"
-                  >
-                    <action.icon className="w-4 h-4 mr-2" />
-                    {action.name}
-                  </Button>
-                </Link>
-              ))}
-            </nav>
-          </div>
-        )}
       </div>
+
+      {/* Mobile Navigation Menu */}
+      {isMenuOpen && (
+        <div className="md:hidden border-t border-gray-200 bg-white">
+          <div className="px-4 py-3 space-y-1">
+            {mobileNav.map((item) => {
+              const isActive = pathname === item.href
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={cn(
+                    "flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+                    isActive
+                      ? "bg-gray-100 text-gray-900"
+                      : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                  )}
+                >
+                  <item.icon className="w-4 h-4" />
+                  <span>{item.name}</span>
+                  {item.name === "My Queues" && activeQueuesCount > 0 && (
+                    <Badge variant="secondary" className="ml-auto text-xs">
+                      {activeQueuesCount}
+                    </Badge>
+                  )}
+                </Link>
+              )
+            })}
+          </div>
+        </div>
+      )}
     </header>
   )
 }

@@ -3,7 +3,6 @@
 import { useState } from "react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-<<<<<<< HEAD
 import { Card, CardContent } from "@/components/ui/card"
 import { 
   Search, 
@@ -12,15 +11,6 @@ import {
   PlusCircle
 } from "lucide-react"
 import Link from "next/link"
-=======
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { 
-  Search, 
-  QrCode, 
-  Hash
-} from "lucide-react"
->>>>>>> f44114e207d42265333890f4cc8b677e778e9ad2
 
 interface QueueSearchProps {
   onSearch: (query: string) => void
@@ -46,20 +36,7 @@ export function QueueSearch({ onSearch, onQueueIdSubmit, onQrScan }: QueueSearch
 
   return (
     <Card className="border-gray-200 shadow-sm">
-<<<<<<< HEAD
       <CardContent className="space-y-4 p-6">
-=======
-      <CardHeader className="pb-4">
-        <CardTitle className="text-xl font-bold text-gray-900 flex items-center gap-2">
-          <Search className="w-5 h-5 text-gray-700" />
-          Quick Queue Access
-        </CardTitle>
-        <CardDescription className="text-gray-600">
-          Search services, enter queue ID, or scan QR code to join queues instantly
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-4">
->>>>>>> f44114e207d42265333890f4cc8b677e778e9ad2
         {/* Queue ID Input - Priority Section */}
         <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
           <div className="flex items-center gap-2 mb-2">
@@ -106,7 +83,6 @@ export function QueueSearch({ onSearch, onQueueIdSubmit, onQrScan }: QueueSearch
           </Button>
         </div>
 
-<<<<<<< HEAD
         {/* Browse All Services Button */}
         <Link href="/join-queue">
           <Button className="w-full bg-gray-900 hover:bg-gray-800 text-white font-semibold flex items-center justify-center gap-2">
@@ -114,26 +90,6 @@ export function QueueSearch({ onSearch, onQueueIdSubmit, onQrScan }: QueueSearch
             Browse All Services
           </Button>
         </Link>
-=======
-        {/* Quick Actions */}
-        <div className="flex flex-wrap gap-2 pt-2">
-          <Badge variant="outline" className="text-xs cursor-pointer hover:bg-gray-100 border-gray-300 text-gray-700">
-            ⚡ Fast Track
-          </Badge>
-          <Badge variant="outline" className="text-xs cursor-pointer hover:bg-gray-100 border-gray-300 text-gray-700">
-            🏥 Hospitals
-          </Badge>
-          <Badge variant="outline" className="text-xs cursor-pointer hover:bg-gray-100 border-gray-300 text-gray-700">
-            ⛽ CNG Pumps
-          </Badge>
-          <Badge variant="outline" className="text-xs cursor-pointer hover:bg-gray-100 border-gray-300 text-gray-700">
-            🍔 Restaurants
-          </Badge>
-          <Badge variant="outline" className="text-xs cursor-pointer hover:bg-gray-100 border-gray-300 text-gray-700">
-            🏦 Banks
-          </Badge>
-        </div>
->>>>>>> f44114e207d42265333890f4cc8b677e778e9ad2
       </CardContent>
     </Card>
   )
