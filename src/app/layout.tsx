@@ -1,34 +1,23 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
-  title: "Z.ai Code Scaffold - AI-Powered Development",
-  description: "Modern Next.js scaffold optimized for AI-powered development with Z.ai. Built with TypeScript, Tailwind CSS, and shadcn/ui.",
-  keywords: ["Z.ai", "Next.js", "TypeScript", "Tailwind CSS", "shadcn/ui", "AI development", "React"],
-  authors: [{ name: "Z.ai Team" }],
+  title: "QueueHub - Unified Queuing Platform",
+  description: "Skip the wait, join queues for any service instantly. From CNG pumps to clinics, restaurants to government offices - all in one app.",
+  keywords: ["QueueHub", "Queue Management", "Virtual Queue", "CNG Pumps", "Clinics", "Restaurants", "Government Services", "India"],
+  authors: [{ name: "QueueHub Team" }],
   openGraph: {
-    title: "Z.ai Code Scaffold",
-    description: "AI-powered development with modern React stack",
-    url: "https://chat.z.ai",
-    siteName: "Z.ai",
+    title: "QueueHub - Unified Queuing Platform",
+    description: "Skip the wait, join queues for any service instantly with India's first unified queuing platform.",
+    url: "https://queuehub.in",
+    siteName: "QueueHub",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Z.ai Code Scaffold",
-    description: "AI-powered development with modern React stack",
+    title: "QueueHub - Unified Queuing Platform",
+    description: "Skip the wait, join queues for any service instantly with India's first unified queuing platform.",
   },
 };
 
@@ -40,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
+        className="font-sans antialiased bg-background text-foreground"
       >
         {children}
         <Toaster />

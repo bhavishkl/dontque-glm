@@ -1,7 +1,7 @@
 // server.ts - Next.js Standalone + Socket.IO
-import { setupSocket } from '@/lib/socket';
+// import { setupSocket } from '@/lib/socket';
 import { createServer } from 'http';
-import { Server } from 'socket.io';
+// import { Server } from 'socket.io';
 import next from 'next';
 
 const dev = process.env.NODE_ENV !== 'production';
@@ -32,15 +32,15 @@ async function createCustomServer() {
     });
 
     // Setup Socket.IO
-    const io = new Server(server, {
-      path: '/api/socketio',
-      cors: {
-        origin: "*",
-        methods: ["GET", "POST"]
-      }
-    });
+    // const io = new Server(server, {
+    //   path: '/api/socketio',
+    //   cors: {
+    //     origin: "*",
+    //     methods: ["GET", "POST"]
+    //   }
+    // });
 
-    setupSocket(io);
+    // setupSocket(io);
 
     // Start the server
     server.listen(currentPort, hostname, () => {
