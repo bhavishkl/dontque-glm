@@ -1,4 +1,6 @@
 "use client"
+import { Suspense } from "react"
+import { Loading } from "@/components/loading"
 
 import { MainLayout } from "@/components/layout/main-layout"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -317,6 +319,7 @@ export default function NotificationsPage() {
   const unreadCount = notifications.filter(n => !n.read).length
 
   return (
+    <Suspense fallback={<Loading />}>
     <MainLayout>
       <div className="max-w-4xl mx-auto space-y-6">
         {/* Header */}
@@ -587,5 +590,6 @@ export default function NotificationsPage() {
         </Card>
       </div>
     </MainLayout>
+    </Suspense>
   )
 }

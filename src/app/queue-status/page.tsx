@@ -1,4 +1,6 @@
 "use client"
+import { Suspense } from "react"
+import { Loading } from "@/components/loading"
 
 import { MainLayout } from "@/components/layout/main-layout"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -101,6 +103,7 @@ export default function QueueStatusPage() {
   }
 
   return (
+    <Suspense fallback={<Loading />}>
     <MainLayout>
       <div className="space-y-6">
         {/* Header */}
@@ -371,5 +374,6 @@ export default function QueueStatusPage() {
         </Tabs>
       </div>
     </MainLayout>
+    </Suspense>
   )
 }

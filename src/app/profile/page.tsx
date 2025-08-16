@@ -1,4 +1,5 @@
 "use client"
+import { Suspense } from "react"
 
 import { MainLayout } from "@/components/layout/main-layout"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -27,6 +28,7 @@ import {
   Stethoscope,
   Users
 } from "lucide-react"
+import { Loading } from "@/components/loading"
 import { serviceTypes, getServiceById } from "@/lib/services"
 import { useState } from "react"
 
@@ -122,6 +124,7 @@ export default function ProfilePage() {
   }
 
   return (
+    <Suspense fallback={<Loading />}>
     <MainLayout>
       <div className="max-w-4xl mx-auto space-y-6">
         {/* Header */}
@@ -517,5 +520,6 @@ export default function ProfilePage() {
         </Tabs>
       </div>
     </MainLayout>
+    </Suspense>
   )
 }

@@ -1,4 +1,5 @@
 "use client"
+import { Suspense } from "react"
 
 import { MainLayout } from "@/components/layout/main-layout"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -9,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Switch } from "@/components/ui/switch"
 import { Badge } from "@/components/ui/badge"
+import { Loading } from "@/components/loading"
 import { 
   Settings, 
   Bell, 
@@ -134,6 +136,7 @@ export default function SettingsPage() {
   }
 
   return (
+    <Suspense fallback={<Loading />}>
     <MainLayout>
       <div className="max-w-4xl mx-auto space-y-6">
         {/* Header */}
@@ -845,5 +848,6 @@ export default function SettingsPage() {
         </Tabs>
       </div>
     </MainLayout>
+    </Suspense>
   )
 }

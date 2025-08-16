@@ -1,5 +1,6 @@
 "use client"
 
+import { Suspense } from "react"
 import { useState } from "react"
 import { MainLayout } from "@/components/layout/main-layout"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -7,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { QueueSearch } from "@/components/queue-search"
+import { Loading } from "@/components/loading"
 import { 
   Clock, 
   MapPin, 
@@ -119,8 +121,9 @@ const handleQuickJoin = (queueId: string) => {
   }
 
   return (
-    <MainLayout>
-      <div className="space-y-6">
+    <Suspense fallback={<Loading />}>
+      <MainLayout>
+        <div className="space-y-6">
         {/* Queue Search Component - Priority Section */}
         <QueueSearch 
           onSearch={handleSearch}
@@ -335,6 +338,7 @@ const handleQuickJoin = (queueId: string) => {
           </CardContent>
         </Card>
       </div>
-    </MainLayout>
+      </MainLayout>
+    </Suspense>
   )
 }

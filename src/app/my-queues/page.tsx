@@ -1,11 +1,14 @@
 "use client"
 
+import { Suspense } from "react"
+import { useState } from "react"
 import { MainLayout } from "@/components/layout/main-layout"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Loading } from "@/components/loading"
 import { 
   Clock, 
   MapPin, 
@@ -22,7 +25,6 @@ import {
 } from "lucide-react"
 import { serviceTypes, getServiceById } from "@/lib/services"
 import { sampleLocations } from "@/lib/sample-data"
-import { useState } from "react"
 
 export default function MyQueuesPage() {
   const [activeTab, setActiveTab] = useState("active")
@@ -242,8 +244,9 @@ export default function MyQueuesPage() {
   }
 
   return (
-    <MainLayout>
-      <div className="max-w-6xl mx-auto space-y-6">
+    <Suspense fallback={<Loading />}>
+      <MainLayout>
+        <div className="max-w-6xl mx-auto space-y-6">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
@@ -382,6 +385,7 @@ export default function MyQueuesPage() {
           </TabsContent>
         </Tabs>
       </div>
-    </MainLayout>
+      </MainLayout>
+    </Suspense>
   )
 }

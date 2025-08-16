@@ -1,4 +1,6 @@
 "use client"
+import { Suspense } from "react"
+import { Loading } from "@/components/loading"
 
 import { MainLayout } from "@/components/layout/main-layout"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -175,6 +177,7 @@ export default function HelpPage() {
   ]
 
   return (
+    <Suspense fallback={<Loading />}>
     <MainLayout>
       <div className="max-w-6xl mx-auto space-y-6">
         {/* Header */}
@@ -523,5 +526,6 @@ export default function HelpPage() {
         </Tabs>
       </div>
     </MainLayout>
+    </Suspense>
   )
 }

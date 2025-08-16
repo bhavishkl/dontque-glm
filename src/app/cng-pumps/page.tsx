@@ -1,4 +1,6 @@
 "use client"
+import { Suspense } from "react"
+import { Loading } from "@/components/loading"
 
 import { MainLayout } from "@/components/layout/main-layout"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -165,6 +167,7 @@ export default function CNGPumpsPage() {
   }
 
   return (
+    <Suspense fallback={<Loading />}>
     <MainLayout>
       <div className="space-y-6">
         {/* Header */}
@@ -350,5 +353,6 @@ export default function CNGPumpsPage() {
         )}
       </div>
     </MainLayout>
+    </Suspense>
   )
 }
