@@ -21,6 +21,7 @@ import {
   AlertCircle,
   MapPin
 } from "lucide-react";
+import { LocationInfoCard } from "@/components/queue/shared/LocationInfoCard";
 import { useMultiCounterQueue } from "@/hooks/use-multi-counter-queue";
 import { useSearchParams } from "next/navigation";
 import { getLocationById } from "@/lib/sample-data";
@@ -94,6 +95,15 @@ function MultiCounterQueueContent() {
   return (
     <MainLayout>
       <div className="min-h-screen bg-gray-50">
+        {/* Location Info Section */}
+        {selectedLocation && (
+          <div className="bg-white border-b border-gray-200 pb-6">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <LocationInfoCard location={selectedLocation} />
+            </div>
+          </div>
+        )}
+        
         {/* Header Section */}
         <div className="bg-white border-b border-gray-200">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
