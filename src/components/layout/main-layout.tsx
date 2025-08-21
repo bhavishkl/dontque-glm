@@ -4,7 +4,6 @@ import { Suspense } from "react"
 import { Header } from "./header"
 import { BottomNavigation } from "./bottom-navigation"
 import { ErrorBoundary } from "@/components/error-boundary"
-import { Loading } from "@/components/loading"
 
 interface MainLayoutProps {
   children: React.ReactNode
@@ -15,7 +14,7 @@ export function MainLayout({ children }: MainLayoutProps) {
     <ErrorBoundary>
       <div className="min-h-screen bg-gray-50">
         {/* Header */}
-        <Suspense fallback={<Loading />}>
+        <Suspense fallback={<div className="h-16 bg-white border-b border-gray-200" />}>
           <Header />
         </Suspense>
         
@@ -27,7 +26,7 @@ export function MainLayout({ children }: MainLayoutProps) {
         </main>
         
         {/* Bottom Navigation (Mobile Only) */}
-        <Suspense fallback={<Loading />}>
+        <Suspense fallback={<div className="h-16 bg-white border-t border-gray-200" />}>
           <BottomNavigation />
         </Suspense>
       </div>
