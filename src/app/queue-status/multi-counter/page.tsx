@@ -1,7 +1,6 @@
 'use client';
 
-import { Suspense, useState, useEffect } from "react";
-import { Loading } from "@/components/loading";
+import { Suspense, useState } from "react";
 import { MainLayout } from "@/components/layout/main-layout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -458,7 +457,7 @@ function MultiCounterQueueContent() {
 
 export default function MultiCounterQueuePage() {
   return (
-    <Suspense fallback={<Loading />}>
+    <Suspense fallback={<div>Loading...</div>}>
       <MultiCounterQueueContent />
     </Suspense>
   );
