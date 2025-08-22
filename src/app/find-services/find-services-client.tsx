@@ -144,8 +144,8 @@ export default function FindServicesClient() {
   const LocationCard = ({ location }: { location: any }) => {
     const service = getServiceById(location.serviceType)
     
-    // Generate a 6-digit queue ID based on location ID
-    const queueId = String(100000 + (location.id % 900000)).padStart(6, '0')
+    // Generate a random 6-digit numerical queue ID
+    const queueId = Math.floor(100000 + Math.random() * 900000).toString()
     
     return (
       <Card className="hover:shadow-lg transition-shadow">
@@ -173,15 +173,6 @@ export default function FindServicesClient() {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {/* Rating section - outside queue status */}
-            <div className="flex items-center justify-center bg-yellow-50 border border-yellow-200 rounded-lg p-3">
-              <div className="flex items-center gap-2">
-                <Star className="w-5 h-5 text-yellow-500 fill-current" />
-                <span className="text-lg font-bold text-yellow-800">{location.rating.toFixed(1)}</span>
-                <span className="text-sm text-yellow-700">rating</span>
-              </div>
-            </div>
-
             {/* Main content split: static info (left) and queue status (right) */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {/* Static information */}
@@ -198,6 +189,10 @@ export default function FindServicesClient() {
                   <div className="flex items-center gap-2">
                     <Clock className="w-4 h-4 text-gray-500" />
                     <span>{location.operatingHours}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Star className="w-4 h-4 text-yellow-500" />
+                    <span className="text-sm">{location.rating.toFixed(1)} rating</span>
                   </div>
                 </div>
 
