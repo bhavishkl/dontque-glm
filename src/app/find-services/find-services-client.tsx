@@ -160,6 +160,12 @@ export default function FindServicesClient() {
                 </CardDescription>
               </div>
             </div>
+            <div className="text-right">
+              <div className="text-xs text-gray-500 mb-1">Queue ID</div>
+              <div className="text-lg font-mono font-bold text-blue-600">
+                {String(location.id).padStart(6, '0')}
+              </div>
+            </div>
           </div>
         </CardHeader>
         <CardContent>
@@ -180,10 +186,6 @@ export default function FindServicesClient() {
                   <div className="flex items-center gap-2">
                     <Clock className="w-4 h-4 text-gray-500" />
                     <span>{location.operatingHours}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Star className="w-4 h-4 text-gray-500" />
-                    <span>{location.rating.toFixed(1)} rating</span>
                   </div>
                 </div>
 
@@ -235,6 +237,13 @@ export default function FindServicesClient() {
                   <div className="flex items-center justify-between">
                     <span className="text-sm font-medium text-blue-900">Estimated Wait</span>
                     <span className="text-lg font-bold text-blue-900">{location.estimatedWaitTime} min</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium text-blue-900">Rating</span>
+                    <div className="flex items-center gap-1">
+                      <Star className="w-4 h-4 text-yellow-500 fill-current" />
+                      <span className="text-lg font-bold text-blue-900">{location.rating.toFixed(1)}</span>
+                    </div>
                   </div>
                 </div>
               </div>
