@@ -160,76 +160,87 @@ export default function FindServicesClient() {
                 </CardDescription>
               </div>
             </div>
-            <Badge className={getStatusColor(location.status)}>
-              {location.status}
-            </Badge>
           </div>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            <div>
-              <p className="text-sm text-gray-600">{location.address}</p>
-            </div>
+            {/* Main content split: static info (left) and queue status (right) */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {/* Static information */}
+              <div className="md:col-span-2 space-y-4">
+                <div>
+                  <p className="text-sm text-gray-600">{location.address}</p>
+                </div>
 
-            <div className="grid grid-cols-2 gap-4 text-sm">
-              <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-gray-500" />
-                <span>{location.phone}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4 text-gray-500" />
-                <span>{location.operatingHours}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Users className="w-4 h-4 text-gray-500" />
-                <span>{location.currentQueue} in queue</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Star className="w-4 h-4 text-gray-500" />
-                <span>{location.rating.toFixed(1)} rating</span>
-              </div>
-            </div>
+                <div className="grid grid-cols-2 gap-4 text-sm">
+                  <div className="flex items-center gap-2">
+                    <Phone className="w-4 h-4 text-gray-500" />
+                    <span>{location.phone}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Clock className="w-4 h-4 text-gray-500" />
+                    <span>{location.operatingHours}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Star className="w-4 h-4 text-gray-500" />
+                    <span>{location.rating.toFixed(1)} rating</span>
+                  </div>
+                </div>
 
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-medium text-blue-900">Estimated Wait Time</span>
-                <span className="text-lg font-bold text-blue-900">{location.estimatedWaitTime} min</span>
-              </div>
-            </div>
+                {/* Facilities */}
+                {location.facilities && location.facilities.length > 0 && (
+                  <div>
+                    <p className="text-sm font-medium text-gray-700 mb-2">Facilities</p>
+                    <div className="flex flex-wrap gap-1">
+                      {location.facilities.slice(0, 4).map((facility, index) => (
+                        <Badge key={index} variant="outline" className="text-xs">
+                          {facility}
+                        </Badge>
+                      ))}
+                      {location.facilities.length > 4 && (
+                        <Badge variant="outline" className="text-xs">
+                          +{location.facilities.length - 4} more
+                        </Badge>
+                      )}
+                    </div>
+                  </div>
+                )}
 
-            {/* Special facilities based on service type */}
-            {location.facilities && location.facilities.length > 0 && (
-              <div>
-                <p className="text-sm font-medium text-gray-700 mb-2">Facilities</p>
-                <div className="flex flex-wrap gap-1">
-                  {location.facilities.slice(0, 4).map((facility, index) => (
-                    <Badge key={index} variant="outline" className="text-xs">
-                      {facility}
-                    </Badge>
-                  ))}
-                  {location.facilities.length > 4 && (
-                    <Badge variant="outline" className="text-xs">
-                      +{location.facilities.length - 4} more
-                    </Badge>
-                  )}
+                {/* Specialties */}
+                {location.specialties && location.specialties.length > 0 && (
+                  <div>
+                    <p className="text-sm font-medium text-gray-700 mb-2">Specialties</p>
+                    <div className="flex flex-wrap gap-1">
+                      {location.specialties.map((specialty, index) => (
+                        <Badge key={index} variant="outline" className="text-xs">
+                          {specialty}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Queue status panel */}
+              <div className="md:col-span-1">
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 h-full flex flex-col gap-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium text-blue-900">Status</span>
+                    <Badge className={getStatusColor(location.status)}>{location.status}</Badge>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium text-blue-900">In Queue</span>
+                    <span className="text-lg font-bold text-blue-900">{location.currentQueue}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium text-blue-900">Estimated Wait</span>
+                    <span className="text-lg font-bold text-blue-900">{location.estimatedWaitTime} min</span>
+                  </div>
                 </div>
               </div>
-            )}
+            </div>
 
-            {/* Specialties for clinics */}
-            {location.specialties && location.specialties.length > 0 && (
-              <div>
-                <p className="text-sm font-medium text-gray-700 mb-2">Specialties</p>
-                <div className="flex flex-wrap gap-1">
-                  {location.specialties.map((specialty, index) => (
-                    <Badge key={index} variant="outline" className="text-xs">
-                      {specialty}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-            )}
-
+            {/* Actions */}
             <div className="flex gap-2">
               <Button className="flex-1 bg-blue-600 hover:bg-blue-700">
                 <Navigation className="w-4 h-4 mr-2" />
