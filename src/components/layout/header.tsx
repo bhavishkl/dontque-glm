@@ -234,8 +234,8 @@ export function Header() {
     <header className={cn(
       "fixed top-0 left-0 right-0 z-50 transition-all duration-200 ease-in-out",
       isScrolled 
-        ? "bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm" 
-        : "bg-white border-b border-gray-100"
+        ? "bg-red-500/95 backdrop-blur-md border-b border-red-600 shadow-sm" 
+        : "bg-red-500 border-b border-red-600"
     )}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
@@ -245,7 +245,7 @@ export function Header() {
               <div className="w-8 h-8 bg-gradient-to-br from-gray-800 to-gray-600 rounded-lg flex items-center justify-center flex-shrink-0">
                 <span className="text-white font-bold text-sm">Q</span>
               </div>
-              <span className="text-lg font-semibold text-gray-900 hidden sm:block">QueueHub</span>
+              <span className="text-lg font-semibold text-white hidden sm:block">QueueHub</span>
             </Link>
           </div>
 
@@ -260,8 +260,8 @@ export function Header() {
                   className={cn(
                     "flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
                     isActive
-                      ? "bg-gray-100 text-gray-900"
-                      : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                      ? "bg-red-600 text-white"
+                      : "text-white hover:bg-red-600 hover:text-white"
                   )}
                 >
                   <item.icon className="w-4 h-4" />
@@ -281,7 +281,7 @@ export function Header() {
             {/* Notifications */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="relative">
+                <Button variant="ghost" size="icon" className="relative text-white hover:bg-red-600">
                   <Bell className="w-5 h-5" />
                   {unreadNotificationsCount > 0 && (
                     <Badge className="absolute -top-1 -right-1 w-5 h-5 p-0 flex items-center justify-center text-xs">
@@ -388,7 +388,7 @@ export function Header() {
             </DropdownMenu>
 
             {/* User Menu */}
-            <Button variant="ghost" size="icon">
+            <Button variant="ghost" size="icon" className="text-white hover:bg-red-600">
               <User className="w-5 h-5" />
             </Button>
 
@@ -396,7 +396,7 @@ export function Header() {
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden"
+              className="md:hidden text-white hover:bg-red-600"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -407,7 +407,7 @@ export function Header() {
 
       {/* Mobile Navigation Menu */}
       {isMenuOpen && (
-        <div className="md:hidden border-t border-gray-200 bg-white">
+        <div className="md:hidden border-t border-red-600 bg-red-500">
           <div className="px-4 py-3 space-y-1">
             {mobileNav.map((item) => {
               const isActive = pathname === item.href
@@ -418,8 +418,8 @@ export function Header() {
                   className={cn(
                     "flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
                     isActive
-                      ? "bg-gray-100 text-gray-900"
-                      : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                      ? "bg-red-600 text-white"
+                      : "text-white hover:bg-red-600 hover:text-white"
                   )}
                 >
                   <item.icon className="w-4 h-4" />
